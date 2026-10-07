@@ -1,0 +1,15 @@
+# Julia-generated files
+Manifest.toml
+*.jl.cov
+*.jl.mem
+deps/build.log
+docs/build/
+
+# Raw sweep results and logs (summaries and samples remain trackable)
+results/*/instances.jsonl
+*.log
+nohup.out
+
+results_old/
+results_*.log
+CITATIONS.bib

@@ -1,0 +1,24 @@
+name = "LPPCheck"
+uuid = "edec9ee0-e9df-4948-8f30-c68074a6eaaa"
+authors = ["JuanCaGC"]
+version = "0.1.0"
+
+[deps]
+Distributed = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+Oscar = "f1435218-dba5-11e9-1e4d-f1a5fab5fc13"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[compat]
+Distributed = "1"
+JSON3 = "1"
+Oscar = "1.8"
+Random = "1"
+Test = "1"
+julia = "1.10"
+
+[extras]
+Test = "8dfed614-23c5-5ad6-b68a-0c0e1d5d8e3a"
+
+[targets]
+test = ["Test"]
