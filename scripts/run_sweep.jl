@@ -6,7 +6,7 @@ using Distributed, JSON3, Dates
 
 function parse_args(args)
     o = Dict("suite" => "main", "seeds" => "5", "procs" => "4", "timeout" => "120", "out" => "results/run",
-             "char" => "0", "seed0" => "1")
+             "char" => "0", "seed0" => "1", "nostop" => "false")
     i = 1
     while i <= length(args)
         startswith(args[i], "--") || error("bad arg $(args[i])")
@@ -49,6 +49,9 @@ function catalog(suite)
         sort!(jobs; by = j -> (cds_holds(j[2]) ? 1 : 0, prod(j[2])))
     elseif suite == "cltn"      # c < n: dmax is the documented heuristic bound (see regularity_bound)
         for n in 3:4, c in 1:n-1, a in tuples(c, 40), k in ALLKINDS; push!(jobs, (n, a, k)); end
+    elseif suite == "charp"     # secondary exploration in characteristic p (smaller Artinian suite)
+        for n in 2:4, a in tuples(n, 120), k in ALLKINDS; push!(jobs, (n, a, k)); end
+        sort!(jobs; by = j -> (cds_holds(j[2]) ? 1 : 0, prod(j[2])))
     elseif suite == "highn"
         for a in tuples(5, 250), k in ALLKINDS; push!(jobs, (5, a, k)); end
         sort!(jobs; by = j -> (cds_holds(j[2]) ? 1 : 0, prod(j[2])))
@@ -106,7 +109,7 @@ function record!(d)
             open(joinpath(OUT, "ALGO_DISAGREEMENTS.jsonl"), "a") do f; JSON3.write(f, d); write(f, '\n'); end
         end
         if get(d, "regular", false) && !get(d, "timeout", false) && get(d, "algo_ok", true) && !(d["A"] && d["B"] && d["C"])
-            stop[] = true
+            opt["nostop"] == "true" || (stop[] = true)   # char p: failures are logged as data, sweep continues
             open(joinpath(OUT, "VIOLATIONS.jsonl"), "a") do f; JSON3.write(f, d); write(f, '\n'); end
             println("\n!!! VIOLATION n=$(d["n"]) a=$(d["a"]) kind=$(d["kind"]) seed=$(d["seed"]) A=$(d["A"]) B=$(d["B"]) C=$(d["C"]) err=$(get(d,"error",""))"); flush(stdout)
         end

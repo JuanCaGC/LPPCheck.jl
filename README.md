@@ -61,10 +61,22 @@ Note: `LPPCheck.is_regular_sequence` is not exported because Oscar exports a fun
 |---|---|---|---|---|---|---|---|---|
 | sanity (c=0, monomial, n=2) | 520 | 433 | 82 | 5 | **0** | 222 | 211 | 7.4 / 0 / 124 |
 | main (Artinian, n=3,4, 45 types of a) | 2250 | 1011 | 823 | 416 | **0** | 108 | 903 | 18.8 / 12 / 116 |
-| c < n (n=3,4) — **partial snapshot, 608 of 975 jobs** | 608 | 483 | 17 | 108 | **0** | 28 | 455 | 60.0 / 28 / 754 |
+| c < n (n=3,4; heuristic degree bound) | 975 | 611 | 36 | 328 | **0** | 29 | 582 | 80.5 / 34 / 1086 |
 | n=5 (Artinian, 16 types of a) | 270 | 71 | 84 | 115 | **0** | 3 | 68 | 110.7 / 114 / 298 |
 
-412 of the 1011 checked `main` instances have `a` violating the Caviglia–De Stefani growth condition `a_i ≥ Σ_{j<i}(a_j−1)` (i ≥ 3). Priority families (checked / equal / strict): (2,2,2): 32/28/4; (3,3,3): 27/7/20; (2,2,2,2): 31/7/24; (2,3,3,3): 21/1/20. Per-(n,a) tables are in `results/*/summary.md`; a sample of instances is in `results/*/sample.jsonl`. The memout fraction (18%) means the heaviest cases (large socle degree) are under-represented. n = 5 uses 3 seeds per type, a 240 s limit and a 4 GB cap, so it is a thin sample; many heavy types have no checked instance. The c < n row is a partial snapshot (the sweep is resumable with `--suite cltn --seeds 5`). Characteristic p was not explored.
+412 of the 1011 checked `main` instances have `a` violating the Caviglia–De Stefani growth condition `a_i ≥ Σ_{j<i}(a_j−1)` (i ≥ 3). Priority families (checked / equal / strict): (2,2,2): 32/28/4; (3,3,3): 27/7/20; (2,2,2,2): 31/7/24; (2,3,3,3): 21/1/20. Per-(n,a) tables are in `results/*/summary.md`; a sample of instances is in `results/*/sample.jsonl`. The memout fraction (18%) means the heaviest cases (large socle degree) are under-represented. n = 5 uses 3 seeds per type, a 240 s limit and a 4 GB cap, so it is a thin sample; many heavy types have no checked instance. The c < n row is complete for the catalog but relies on a heuristic degree bound; in particular it is evidence only up to that bound. In characteristic p only small Artinian cases were run.
+
+
+### Characteristic p (secondary exploration; Artinian, n=2–4, products of degrees ≤ 120, 3 seeds per type)
+
+EGH is open in positive characteristic and the cited preprints claim nothing there; any failure would be logged as data, not as a bug.
+
+| char | Total | Checked | Discarded | Memout/timeout | Violations of (A)/(B)/(C) | Equal | Strict | Slack mean / median / max |
+|---|---|---|---|---|---|---|---|---|
+| 2 | 690 | 107 | 583 | 0 | **0** | 34 | 73 | 13.6 / 4 / 68 |
+| 3 | 690 | 287 | 403 | 0 | **0** | 90 | 197 | 13.1 / 6 / 94 |
+| 5 | 690 | 334 | 356 | 0 | **0** | 94 | 240 | 15.4 / 6.0 / 94 |
+| 32003 | 690 | 415 | 275 | 0 | **0** | 105 | 310 | 16.2 / 8 / 94 |
 
 ## License
 
